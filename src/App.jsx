@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import pokemonsList from "./assets/pokemons";
+import PokemonCard from "./components/PokemonCard";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // États pour la recherche et le type de filtre
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterType, setFilterType] = useState("name");
+
+  // Filtrer les Pokémon en fonction du critère sélectionné
+  const filteredPokemons = pokemonsList.filter((pokemon) => {
+    const value = searchTerm.toLowerCase();
+    
+    switch (filterType) {
+      case "name":
+        return pokemon.name.english.toLowerCase().includes(value);
+      case "type":
+        return pokemon.type.some((t) => t.toLowerCase().includes(value));
+      case "hp":
+        return pokemon.base.HP.toString().includes(value);
+      case "attack":
+        return pokemon.base.Attack.toString().includes(value);
+      case "defense":
+        return pokemon.base.Defense.toString().includes(value);
+      case "speed":
+        return pokemon.base.Speed.toString().includes(value);
+      default:
+        return true;
+    }
+  });
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <h1>Pokédex</h1>
+
+      {/* Conteneur de la recherche */}
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder={`Rechercher par ${filterType}...`}
+          className="search-bar"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        {/* Menu déroulant pour choisir le filtre */}
+        <select
+          className="filter-select"
+          value={filterType}
+          onChange={(e) => setFilterType(e.target.value)}
+        >
+          <option value="name">Nom</option>
+          <option value="type">Type</option>
+          <option value="hp">HP</option>
+          <option value="attack">Attaque</option>
+          <option value="defense">Défense</option>
+          <option value="speed">Vitesse</option>
+        </select>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      {/* Affichage des Pokémon filtrés */}
+      <div className="pokemon-container">
+        {filteredPokemons.map((pokemon) => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
+        ))}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

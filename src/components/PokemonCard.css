@@ -1,0 +1,107 @@
+.pokemon-card {
+  width: 220px;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  background: white;
+  transition: transform 0.3s ease-in-out;
+  border: 4px solid gold;
+  position: relative;
+}
+
+.pokemon-card:hover {
+  transform: scale(1.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.pokemon-name {
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.pokemon-hp {
+  font-size: 1rem;
+  color: red;
+  font-weight: bold;
+}
+
+.pokemon-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.type-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.pokemon-type {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+}
+
+.pokemon-stats {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.pokemon-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.attack-button,
+.heal-button {
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.attack-button {
+  background: red;
+  color: white;
+}
+
+.attack-button:hover {
+  background: darkred;
+}
+
+.heal-button {
+  background: green;
+  color: white;
+}
+
+.heal-button:hover {
+  background: darkgreen;
+}
+
+.pokemon-message {
+  margin-top: 10px;
+  font-weight: bold;
+  color: red;
+}
